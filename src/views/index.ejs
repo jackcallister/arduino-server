@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arduino Client</title>
+  <script type="text/javascript">
+    setInterval(function () {
+      var request = new XMLHttpRequest();
+
+      request.open('GET', '/api/counter', true);
+
+      request.onload = function() {
+        if (this.status >= 200 && this.status < 400) {
+          var data = JSON.parse(this.response);
+
+          var el = document.getElementById("counter")
+
+          el.innerHTML = data.count;
+        } else {
+          console.log("Error")
+        }
+      };
+      request.send();
+    }, 3000)
+  </script>
+</head>
+<body>
+  Arduino has pinged the server <span id="counter"><%= count %></span>
+</body>
+</html>
